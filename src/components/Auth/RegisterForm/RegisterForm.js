@@ -30,7 +30,7 @@ export default function RegisterForm  (props) {
                 const newUser = values;
                 delete newUser.repeatPassword;
 
-                const result =  await register({
+                await register({
                     variables:{
                         input: {
                           email: newUser.email,

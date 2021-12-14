@@ -6,7 +6,7 @@ import Header from '../components/Header';
 
 export default function LayoutBasic (props){
     //This props contained all the information aboout his children. In this case the children were the Component
-    console.log(props)
+    //console.log(props)
 
     return (
         <>
