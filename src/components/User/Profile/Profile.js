@@ -23,9 +23,9 @@ export default function Profile ({username}){
             username: username
         }
     });
-
     if(loading) return null;
     if(error) return <UserNotFound/>
+   
     const {getUser} = data;
 
 
