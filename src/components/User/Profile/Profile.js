@@ -8,6 +8,8 @@ import UserNotFound from '../../UserNotFound';
 import ModalBasic from '../../Modal/ModalBasic';
 import AvatarForm from '../AvatarForm';
 import userAuth from '../../../hooks/useAuth';
+import HeaderProfile from './HeaderProfile';
+import SettignsForm from '../SettignsForm';
 
 
 export default function Profile ({username}){
@@ -37,6 +39,11 @@ export default function Profile ({username}){
                 setShowModal(true); 
                 break;
         
+            case 'settigns':
+                setTitleModal('');
+                setChildrenModal(<SettignsForm setShowModal={setShowModal} setTitleModal={setTitleModal} setChildrenModal={setChildrenModal} />);
+                setShowModal(true); 
+                break;    
             default:
                 break;
         }
@@ -53,7 +60,7 @@ export default function Profile ({username}){
                 </Grid.Column>
 
                 <Grid.Column width={5} className='profile__right'>
-                    <div>Header Profile</div>
+                    <HeaderProfile username={username} getUser={getUser} auth={auth} handleModal={handleModal} />
                     <div>Followers</div>
                     <div className='other'>
                         <p className='name'>{  getUser.name }</p>
