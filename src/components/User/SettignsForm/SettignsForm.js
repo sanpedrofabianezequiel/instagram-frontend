@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import {useApolloClient} from '@apollo/client';
 import './SettignsForm.scss';
 import useAuth from '../../../hooks/useAuth';
-
+import PasswordForm from '../PasswordForm';
 
 export default function SettignsForm(props){
     const {setShowModal,setTitleModal,setChildrenModal} = props;
@@ -23,11 +23,7 @@ export default function SettignsForm(props){
 
     const onChangePassword = ()=>{
         setTitleModal('Cambiar contraseña');
-        setChildrenModal(
-            <div>
-                <h2>FormPassword</h2>
-            </div>
-        )
+        setChildrenModal(<PasswordForm onLogout={onLogout} />)
     }
 
     return (
