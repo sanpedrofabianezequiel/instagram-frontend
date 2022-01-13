@@ -5,14 +5,17 @@ import {useApolloClient} from '@apollo/client';
 import './SettignsForm.scss';
 import useAuth from '../../../hooks/useAuth';
 import PasswordForm from '../PasswordForm';
+import EmailForm from '../EmailForm';
+import DescriptionForm from '../DescriptionForm';
+import SiteWebForm from '../SiteWebForm';
 
 export default function SettignsForm(props){
-    const {setShowModal,setTitleModal,setChildrenModal} = props;
+    const {setShowModal,setTitleModal,setChildrenModal,getUser,refetch} = props;
     const {logout} = useAuth();
     const history  = useHistory();
     const client   = useApolloClient();
 
-
+    console.log(getUser);
     const onLogout= ()=>{
         logout();
         history.push('/')
@@ -26,12 +29,28 @@ export default function SettignsForm(props){
         setChildrenModal(<PasswordForm onLogout={onLogout} />)
     }
 
+    const onChangeEmail = ()=>{
+        setTitleModal('Cambiar email');
+        setChildrenModal(<EmailForm setShowModal={setShowModal} currentEmail={getUser.email} refetch={refetch} />)
+    }
+
+    const onChangeDescription = ()=>{
+        setTitleModal('Actualizar tu biografia');
+        setChildrenModal(<DescriptionForm setShowModal={setShowModal} currentDescription={getUser.description} refetch={refetch} />)
+    }
+    
+    const onChangeSiteWeb = ()=>{
+        setTitleModal('Actualizar tu Sitio Web');
+        setChildrenModal(<SiteWebForm setShowModal={setShowModal} currentSiteWeb={getUser.siteWeb} refetch={refetch} />)
+    }
+
+
     return (
         <div className="settigns-form"> 
             <Button onClick={onChangePassword}>Cambiar contraseña</Button>
-            <Button>Cambiar email</Button>
-            <Button>Descripcion</Button>
-            <Button>Sitio web</Button>
+            <Button onClick={onChangeEmail}>Cambiar email</Button>
+            <Button onClick={onChangeDescription}>Descripcion</Button>
+            <Button onClick={onChangeSiteWeb}>Sitio web</Button>
             <Button onClick={onLogout}>Cerrar sesiòn</Button>
             <Button onClick={()=>setShowModal(false)}>Cancelar</Button>
         </div>

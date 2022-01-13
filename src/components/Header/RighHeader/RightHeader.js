@@ -19,7 +19,7 @@ export default function RightHeader (){
 
     if(loading || error ) return null;
     const {getUser} = data;
-    console.log(auth);
+    //console.log(auth);
     return (
           <div className="right-header">
               <Link to="/">

@@ -20,14 +20,14 @@ export default function Profile ({username}){
 
 
 
-    const {data,loading,error} =  useQuery(GET_USER,{
+    const {data,loading,error,refetch} =  useQuery(GET_USER,{
         variables:{
             username: username
         }
     });
     if(loading) return null;
     if(error) return <UserNotFound/>
-   
+    
     const {getUser} = data;
 
 
@@ -41,7 +41,7 @@ export default function Profile ({username}){
         
             case 'settigns':
                 setTitleModal('');
-                setChildrenModal(<SettignsForm setShowModal={setShowModal} setTitleModal={setTitleModal} setChildrenModal={setChildrenModal} />);
+                setChildrenModal(<SettignsForm setShowModal={setShowModal} setTitleModal={setTitleModal} setChildrenModal={setChildrenModal} getUser={getUser} refetch={refetch} />);
                 setShowModal(true); 
                 break;    
             default:
@@ -68,6 +68,10 @@ export default function Profile ({username}){
                             getUser.siteWeb && (
                                 <p className='description' >{getUser.description}</p>
                             )
+                          
+                        }
+                        {
+                              (<p className='description' >{getUser.description}</p>)
                         }
                     </div>
                 </Grid.Column>
