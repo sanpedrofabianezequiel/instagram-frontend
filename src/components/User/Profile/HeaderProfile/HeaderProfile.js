@@ -15,6 +15,7 @@ export default function HeaderProfile(props){
         }
     });
     
+    //console.log(data);
     const buttonFollow = ()=>{
         if(data.isFollow){
             return <Button className='btn-danger' onClick={onUnFollow}>Dejar de seguir</Button>
@@ -42,7 +43,7 @@ export default function HeaderProfile(props){
         try {
             await unFollow({
                 variables:{
-                    username: getUser.userName
+                    input: getUser.userName
                 }
             })
             

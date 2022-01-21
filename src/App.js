@@ -46,6 +46,7 @@ function App() {
 
 
   return (
+  
     <ApolloProvider client= {client}>
       <AuthContext.Provider value={authData}>
         {!auth ? <Auth /> : <Navigation/>}     

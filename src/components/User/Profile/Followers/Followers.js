@@ -13,42 +13,46 @@ export default function Followers(props){
     const [childrenModal, setChildrenModal] = useState(null);
 
 
-    const {data:dataFollowers,loading:loadingFollowers,startPolling:startPollingFollowers,stopPolling:stopPollingFollowers} = useQuery(GET_FOLLOWERS,{
+    const {   data: dataFollowers,
+        loading: loadingFollowers,
+        startPolling: startPollingFollowers,
+        stopPolling: stopPollingFollowers,} = useQuery(GET_FOLLOWERS,{
         variables:{
             input:username
         }
     });
 
     
-    const {data:dataFolloweds,loading:loadingFolloweds,startPolling:startPollingFollowed,stopPolling:stopPollingFolloweds} = useQuery(GET_FOLLOWEDS,{
+    const { data: dataFolloweds,
+        loading: loadingFolloweds,
+        startPolling: startPollingFolloweds,
+        stopPolling: stopPollingFolloweds,} = useQuery(GET_FOLLOWEDS,{
         variables:{
             input:username
         }
     })    
 
+    //Real time, sobrecargando el servidor
+    useEffect(() => {
+        startPollingFollowers(1000);
+        return () => {
+          stopPollingFollowers();
+        };
+      }, [startPollingFollowers, stopPollingFollowers]);
+    
+      useEffect(() => {
+        startPollingFolloweds(1000);
+        return () => {
+          stopPollingFolloweds();
+        };
+      }, [startPollingFolloweds, stopPollingFolloweds]);
+
+
     if(loadingFollowers || loadingFolloweds) return null;
     const {getFollowers} = dataFollowers;
     const {getFolloweds} = dataFolloweds; 
-
-    //Real time, sobrecargando el servidor
-    useEffect(() => {
-        startPollingFollowers(1000);//cada 1 segundo realizamos una peticion
-        return () => {
-            //Desmont
-            stopPollingFollowers();
-        }
-    }, [startPollingFollowers, stopPollingFollowers])
-
-
+      console.log(getFollowers,getFolloweds);
     
-    //Real time, sobrecargando el servidor
-    useEffect(() => {
-        startPollingFollowed(1000);//cada 1 segundo realizamos una peticion
-        return () => {
-            //Desmont
-            stopPollingFolloweds();
-        }
-    }, [startPollingFollowed, stopPollingFolloweds ])
 
 
 
@@ -67,10 +71,14 @@ export default function Followers(props){
 
     return(
         <>
-            <div className='followers'>
-                <p><span></span></p>
-                <p className='link' onClick={openFollowers}><span>{size(getFollowers)}</span></p>
-                <p className='link' onClick={openFolloweds}><span>{size(getFolloweds)}</span></p>
+            <div className="followers">
+             
+                <p className="link" onClick={openFollowers}>
+                    <span>{size(getFollowers)}</span> seguidores
+                </p>
+                <p className="link" onClick={openFolloweds}>
+                    <span>{size(getFolloweds)}</span> seguidos
+                </p>
             </div>
             <ModalBasic show={showModal} setShow={setShowModal} title={titleModal}>
                 {childrenModal}

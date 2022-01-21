@@ -3,18 +3,19 @@ import {size,map} from 'lodash';
 import './ListUsers.scss';
 import {Image} from 'semantic-ui-react';
 import ImageNotFound from '../../../assets/png/avatar.png'
-import {userHistory} from  'react-router-dom';
+import {useNavigate } from  'react-router-dom';
 
 
 
 export default function ListUsers(props){
     const {users,setShowModal} = props;
 
-    const history = userHistory();
+   // const history = useNavigate();
 
     const goToUser = (input)=>{
         setShowModal(false);
-        history.push(`/${input}`);
+        //history(`/${input}`);
+        this.props.history.push(`/${input}`)
     }
 
     return(

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
-import { useHistory } from 'react-router-dom';
+import { egate } from 'react-router-dom';
 import {useApolloClient} from '@apollo/client';
 import './SettignsForm.scss';
 import useAuth from '../../../hooks/useAuth';
@@ -12,13 +12,15 @@ import SiteWebForm from '../SiteWebForm';
 export default function SettignsForm(props){
     const {setShowModal,setTitleModal,setChildrenModal,getUser,refetch} = props;
     const {logout} = useAuth();
-    const history  = useHistory();
+    //const history  = useNavigate();
     const client   = useApolloClient();
 
     console.log(getUser);
     const onLogout= ()=>{
         logout();
-        history.push('/')
+       // history('/')
+       
+        document.location.href = ('/');
         //clear chache apollo
         client.clearStore();
     }

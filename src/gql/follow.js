@@ -13,8 +13,8 @@ export const FOLLOW =gql`
 `;
 
 export const UN_FOLLOW = gql`
-    mutation Follow($username: String!) {
-        follow(username: $username)
+    mutation UnFollow($input: String!) {
+        unFollow(input: $input)
     }
 `;
 
