@@ -15,16 +15,17 @@ export default function ListUsers(props){
     const goToUser = (input)=>{
         setShowModal(false);
         //history(`/${input}`);
-        this.props.history.push(`/${input}`)
+        document.location.href = (`/${input}`);
+        //this.props.history.push(`/${input}`)
     }
-
+    console.log(users);
     return(
         <div className='list-users'>
             {
                 size(users)=== 0 
                 ? ( <p className='list-users__not-users' >No se han encontrado usuarios</p>)
                 : (
-                    map(users,(item,index)=>{
+                    map(users,(item,index)=>(
                         <div key={index} className='list-users__user' onClick={()=>goToUser(item.userName)} >
                             <Image src={item.avatar || ImageNotFound } avatar  />
                             <div>
@@ -32,7 +33,7 @@ export default function ListUsers(props){
                                 <p>{item.userName}</p>
                             </div>
                         </div>
-                    })
+                    ))
                 )
             }
         </div>

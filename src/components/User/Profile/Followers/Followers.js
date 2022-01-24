@@ -7,7 +7,7 @@ import ModalBasic from '../../../Modal/ModalBasic';
 import ListUsers from '../../ListUsers';
 
 export default function Followers(props){
-    const {username} = props;
+    const {username,totalPublications} = props;
     const [showModal,setShowModal] = useState(false);
     const [titleModal, setTitleModal] = useState('');
     const [childrenModal, setChildrenModal] = useState(null);
@@ -51,7 +51,7 @@ export default function Followers(props){
     if(loadingFollowers || loadingFolloweds) return null;
     const {getFollowers} = dataFollowers;
     const {getFolloweds} = dataFolloweds; 
-      console.log(getFollowers,getFolloweds);
+      //console.log(getFollowers,getFolloweds);
     
 
 
@@ -72,7 +72,10 @@ export default function Followers(props){
     return(
         <>
             <div className="followers">
-             
+                <p>
+                    <span>{totalPublications}</span> Publicaciones
+                </p>
+
                 <p className="link" onClick={openFollowers}>
                     <span>{size(getFollowers)}</span> seguidores
                 </p>

@@ -41,6 +41,7 @@ export default function HeaderProfile(props){
 
     const onUnFollow = async()=>{
         try {
+           
             await unFollow({
                 variables:{
                     input: getUser.userName
