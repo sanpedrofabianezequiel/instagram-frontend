@@ -20,7 +20,7 @@ export default function User({match}){
       return () => {
         stopPolling();
       };
-    }, [startPolling,startPolling]);
+    }, [startPolling,stopPolling]);
     
 
 
