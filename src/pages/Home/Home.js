@@ -2,6 +2,7 @@ import React from 'react';
 import './Home.scss';
 import { Grid} from 'semantic-ui-react';
 import Feed from '../../components/Home/Feed';
+import UsersNotFolloweds from '../../components/Home/UsersNotFolloweds';
 
 export default function Home (props) {
 
@@ -12,7 +13,7 @@ export default function Home (props) {
                 <Feed />
             </Grid.Column>
             <Grid.Column className='home__right' width={5} >
-                 Usuarios no seguidos
+                 <UsersNotFolloweds />
             </Grid.Column>
         </Grid>
     )
